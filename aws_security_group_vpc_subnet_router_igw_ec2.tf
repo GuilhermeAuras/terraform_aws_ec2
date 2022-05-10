@@ -90,6 +90,12 @@ resource "aws_instance" "vm-ec2" {
   subnet_id                   = aws_subnet.public-subnet-bill-01.id
   vpc_security_group_ids      = [ aws_security_group.libera-ssh.id ]
   associate_public_ip_address = true
+  
+  root_block_device {
+  volume_size = 40
+  volume_type = "gp2"
+  encrypted   = false
+  }
 
   tags = {
     name = "vm-ec2-${count.index}"
